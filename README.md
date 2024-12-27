@@ -1,4 +1,4 @@
-# AppImage del Patcher di Undertale Spaghetti Project 
+# Generatore di AppImage per il patcher di SpaghettiProject
 ### Prerequisiti
 Assicurati che la tua distribuzione supporti l'esecuzione di file AppImage. La maggior parte delle distribuzioni moderne lo fa nativamente, ma alcune potrebbero richiedere l'installazione del pacchetto `libfuse`.
 
