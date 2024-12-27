@@ -15,7 +15,7 @@ Il progetto è nato per risolvere il problema di compatibilità con le dipendenz
 ### Opzione 1: Comando Singolo
 Usa questo comando per generare l'appimage:  
 ```bash
-curl -s "https://raw.githubusercontent.com/demperor-music/SpaghettiPatcherAppImage/refs/heads/main/PatcherAppImageGenerator.sh" | bash
+curl -s "https://raw.githubusercontent.com/demperor-music/SpaghettiProjectAppImageGenerator/refs/heads/main/PatcherAppImageGenerator.sh" | bash
 ```
 
 ### Opzione 2: Scarica il file ed eseguilo
