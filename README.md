@@ -11,6 +11,11 @@ Il progetto è nato per risolvere il problema di compatibilità con le dipendenz
 - **Via terminale**: `./ItalianPatcherByUSPLinux.AppImage`
 
 ## Guida alla compilazione
+### Dipendenze
+- Perl
+- curl
+- imagemagick
+- tar
 
 ### Opzione 1: Comando Singolo
 Usa questo comando per generare l'appimage:  
