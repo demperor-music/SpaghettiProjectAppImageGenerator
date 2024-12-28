@@ -16,6 +16,7 @@ Il progetto è nato per risolvere il problema di compatibilità con le dipendenz
 - curl
 - imagemagick
 - tar
+- make
 
 ### Opzione 1: Comando Singolo
 Usa questo comando per generare l'appimage:  
