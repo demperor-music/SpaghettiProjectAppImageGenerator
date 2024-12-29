@@ -22,17 +22,17 @@ readonly ICON_INDEX=-1
 
 function debug_echo() {
     if $_debug_mode; then
-      echo "${1:-$(cat -)}"
+        echo "${1:-$(cat -)}"
     else
-      cat - > /dev/null
+        cat - > /dev/null
     fi
 }
 
 function check_command() {
-  command -v "$1" >/dev/null 2>&1 || {
-    echo "Errore: comando \"$1\" non trovato." >&2
-    exit 1
-  }
+    command -v "$1" >/dev/null 2>&1 || {
+        echo "Errore: comando \"$1\" non trovato." >&2
+        exit 1
+    }
 }
 
 echo -n "Controllo dipendenze... "
@@ -46,54 +46,53 @@ check_command perl
 echo "OK"
 
 function show_help() {
-  echo "Usage:	$0 [OPTIONS]"
-  echo
-  echo "Opzioni:"
-  echo "	-f <file>	Usa un file .tar.gz personalizzato invece dell'ultima release."
-  echo "	-k		Conserva i file temporanei alla fine."
-  echo "	-d		Mostra output verboso."
-  echo "	-h		Mostra questa guida e esce."
+    echo "Usage:	$0 [OPTIONS]"
+    echo
+    echo "Opzioni:"
+    echo "	-f <file>	Usa un file .tar.gz personalizzato invece dell'ultima release."
+    echo "	-k		Conserva i file temporanei alla fine."
+    echo "	-d		Mostra output verboso."
+    echo "	-h		Mostra questa guida e esce."
 }
 
 custom_file=""
 keep_temp=false
 
 while getopts "df:kch" opt; do
-  case $opt in
-    f) custom_file=$OPTARG ;;
-    k) keep_temp=true ;;
-    h) show_help; exit 0 ;;
-    d) _debug_mode=true ;;
-    *) show_help; exit 1 ;;
-  esac
+    case $opt in
+        f) custom_file=$OPTARG ;;
+        k) keep_temp=true ;;
+        h) show_help; exit 0 ;;
+        d) _debug_mode=true ;;
+        *) show_help; exit 1 ;;
+    esac
 done
 
 download_latest=$([ -z "$custom_file" ] && echo "true" || echo "false")
 
 # Determina il file .tar.gz da usare
 if $download_latest; then
-  patcher_file="$PATCHER_URL"
+    patcher_file="$PATCHER.tar.gz"
 else
-  if [ ! -f "$custom_file" ]; then
-    echo "Errore: il file fornito non esiste. Uscita."
-    exit 1
-  fi
-  patcher_file="$custom_file"
+    if [ ! -f "$custom_file" ]; then
+        echo "Errore: il file fornito non esiste. Uscita."
+        exit 1
+    fi
+    patcher_file="$custom_file"
 fi
 
 
 # Se $_pkgdir esiste già e non è vuota...
 if [ -e "$_pkgdir" ] && [ -n "$(ls -A "$_pkgdir")" ]; then
-  echo -n "La directory $_pkgdir non è vuota e sarà necessario eliminarla. Vuoi continuare? (S/n) "
-  local confirmation=""
-  read -r confirmation
-  if [[ "$confirmation" =~ [nN] ]]; then
-    echo "Operazione annullata."
-    exit 1
-  else
-    rm -rf "$_pkgdir"
-    echo "$_pkgdir è stato eliminato."
-  fi
+    echo -n "La directory $_pkgdir non è vuota e sarà necessario eliminarla. Vuoi continuare? (S/n) "
+    read -r confirmation
+    if [[ "$confirmation" =~ [nN] ]]; then
+        echo "Operazione annullata."
+        exit 1
+    else
+        rm -rf "$_pkgdir"
+        echo "$_pkgdir è stato eliminato."
+    fi
 fi
 
 
@@ -101,10 +100,10 @@ mkdir -p "$_download_dir" "$_pkgdir"
 cd "$_download_dir"
 
 if $download_latest; then
-  echo "Scaricamento di $PATCHER..."
-  curl -L -# "$patcher_file" -o "$PATCHER.tar.gz"
+    echo "Scaricamento di $PATCHER..."
+    curl -L -# "$PATCHER_URL" -o "$patcher_file"
 else
-  echo "Usando il file personalizzato fornito: $patcher_file"
+    echo "Usando il file personalizzato fornito: $patcher_file"
 fi
 
 echo "Scaricamento di $DOTNET..."
@@ -202,14 +201,15 @@ echo " OK"
 
 cd "$current_dir"
 echo "Creazione AppImage..."
-"$_download_dir/appimagetool.AppImage" "$_pkgdir" "ItalianPatcherByUSPLinux.AppImage"
+"$_download_dir/appimagetool.AppImage" "$_pkgdir" "$PATCHER.AppImage"
+# Esegue lo strumento AppImageTool scaricato per trasformare $_pkgdir in un file AppImage.
 
 if ! $keep_temp; then
-  echo -n "Pulizia file temporanei..."
-  rm -rf "$_download_dir"
-  rm -rf "$_pkgdir"
-  echo " OK"
+    echo -n "Pulizia file temporanei..."
+    rm -rf "$_download_dir"
+    rm -rf "$_pkgdir"
+    echo " OK"
 fi
 
 echo "Build completata con successo!"
-
+echo "Il file è: $(pwd)/$PATCHER.AppImage"
