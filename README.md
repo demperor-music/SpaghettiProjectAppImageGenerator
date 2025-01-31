@@ -10,6 +10,9 @@ Il progetto è nato per risolvere il problema di compatibilità con le dipendenz
 - **Via interfaccia grafica**: Fai doppio click sul file (su alcuni desktop è click singolo)
 - **Via terminale**: `./ItalianPatcherByUSPLinux.AppImage`
 
+## Nota sul patcher
+La patch di SpaghettiProject non è stata testata al di fuori di Windows. Per far funzionare correttamente il patcher è necessario sovrascrivere il file di gioco "game.unx" con la versione Windows del file ("data.win") e rinominarlo "game.unx"
+
 ## Guida alla compilazione
 ### Dipendenze
 - Perl
