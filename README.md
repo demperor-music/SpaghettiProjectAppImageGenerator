@@ -1,4 +1,7 @@
 # Generatore di AppImage per il patcher di SpaghettiProject
+
+> ATTENZIONE: Dal rilascio della versione 2.0 di USP, questo progetto non è più necessario. Utilizza il rilascio ufficiale.
+
 ### Prerequisiti
 Assicurati che la tua distribuzione supporti l'esecuzione di file AppImage. La maggior parte delle distribuzioni moderne lo fa nativamente, ma alcune potrebbero richiedere l'installazione del pacchetto `libfuse`.
 
