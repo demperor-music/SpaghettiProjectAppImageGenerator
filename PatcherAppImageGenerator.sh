@@ -11,7 +11,7 @@ readonly PATCHER="ItalianPatcherByUSPLinux"
 readonly DOTNET="dotnet50"
 readonly OPENSSL="openssl-1.0.2u"
 
-readonly BASE_URL_GITHUB="https://github.com/USPAssets/Installer/releases/latest/download"
+readonly BASE_URL_GITHUB="https://github.com/USPAssets/Installer/releases/download/v1.0.0.0"
 readonly PATCHER_URL="$BASE_URL_GITHUB/$PATCHER.tar.gz"
 readonly DOTNET_URL="https://download.visualstudio.microsoft.com/download/pr/a2b96f83-e22a-4fa6-a10e-709b3effac9a/0d6ade6c0ceebc8ef7dbf2b1a6d86f17/aspnetcore-runtime-5.0.17-linux-x64.tar.gz"
 readonly OPENSSL_URL="https://www.openssl.org/source/$OPENSSL.tar.gz"
